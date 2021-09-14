@@ -1,0 +1,66 @@
+package ${package}.${moduleName}.service;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.bjyt.bange.common.core.dto.IdDTO;
+
+import ${package}.api.${moduleName}.entity.${className};
+import ${package}.api.${moduleName}.model.${pathName}.*;
+
+import java.util.List;
+/**
+ * ${comments} Service
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface I${className}Service extends IService<${className}> {
+
+    /**
+     * 分页查询
+     *
+     * @return
+     * @date ${datetime}
+     */
+    IPage<${className}VO> page(${className}PageDTO ${classname}PageDTO);
+
+    /**
+     * 查询${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    List<${className}VO> list(${className}ListDTO ${classname}ListDTO);
+
+    /**
+     * 根据id获取${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    ${className}VO get(IdDTO idDTO);
+
+    /**
+     * 保存${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    Long save(${className}SaveDTO ${classname}SaveDTO);
+
+    /**
+     * 更改${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    Boolean update(${className}UpdateDTO ${classname}UpdateDTO);
+
+    /**
+     * 通过id删除${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    Boolean delete(IdDTO idDTO);
+}

@@ -1,0 +1,106 @@
+package ${package}.${moduleName}.wrapper;
+
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.bjyt.bange.common.core.enums.DelFlagEnum;
+import com.bjyt.bange.common.core.enums.OrderTypeEnum;
+import com.bjyt.bange.common.core.wrapper.BaseEntityWrapper;
+import ${package}.api.${moduleName}.entity.${className};
+import ${package}.api.${moduleName}.model.${pathName}.*;
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
+
+import java.time.LocalDateTime;
+
+/**
+ * ${comments} Wrapper
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@AllArgsConstructor
+public class ${className}Wrapper extends BaseEntityWrapper<${className}, ${className}VO> {
+
+    private ${className}Mapper ${classname}Mapper;
+
+    @Override
+    public ${className}VO entityVO(${className} ${classname}) {
+        ${className}VO ${classname}VO = new ${className}VO();
+        BeanUtils.copyProperties(${classname}, ${classname}VO);
+        return ${classname}VO;
+    }
+
+    /**
+     * 保存${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    public ${className} entityForSave(${className}SaveDTO ${classname}SaveDTO) {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}SaveDTO, ${classname});
+        ${classname}.setCreateTime(LocalDateTime.now());
+        ${classname}.setUpdateTime(LocalDateTime.now());
+        ${classname}.setDelFlag(DelFlagEnum.NO.getValue());
+        return ${classname};
+    }
+
+    /**
+     * 修改${className}
+     *
+     * @return
+     * @date ${datetime}
+     */
+    public ${className} entityForUpdate(${className}UpdateDTO ${classname}UpdateDTO) {
+      ${className} ${classname} = ${classname}Mapper.selectById(${classname}UpdateDTO.getId());
+        BeanUtils.copyProperties(${classname}UpdateDTO, ${classname});
+        ${classname}.setUpdateTime(LocalDateTime.now());
+        return ${classname};
+    }
+
+    /**
+     * 分页属性设置
+     *
+     * @return
+     * @date ${datetime}
+     */
+    public IPage entityPageCondition(${className}PageDTO ${classname}PageDTO) {
+        IPage<${className}> page = new Page<>();
+        page.setSize(${classname}PageDTO.getSize());
+        page.setCurrent(${classname}PageDTO.getCurrent());
+        if (${classname}PageDTO.getOrderType().equals(OrderTypeEnum.ASC.getValue())){
+            ((Page<${className}>) page).setAsc(${classname}PageDTO.getOrderField());
+        } else {
+            ((Page<${className}>) page).setDesc(${classname}PageDTO.getOrderField());
+        }
+        return page;
+    }
+
+    /**
+     * 描述
+     *
+     * @return
+     * @date ${datetime}
+     */
+    public LambdaQueryWrapper entityWrapperCondition(${className}PageDTO ${classname}PageDTO) {
+        LambdaQueryWrapper<${className}> condition = new LambdaQueryWrapper<>();
+        /**
+         * 示例：condition.like(${className}::getName, ${classname}PageDTO.getKeyword())
+         */
+        return condition;
+    }
+
+    /**
+     * 拼装查询条件
+     *
+     * @return
+     * @date ${datetime}
+     */
+    public LambdaQueryWrapper entityListWrapper(${className}ListDTO ${classname}ListDTO) {
+        LambdaQueryWrapper<${className}> condition = new LambdaQueryWrapper<>();
+        return condition;
+    }
+
+}

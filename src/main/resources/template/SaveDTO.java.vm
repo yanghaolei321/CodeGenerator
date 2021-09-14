@@ -1,0 +1,31 @@
+package ${package}.api.${moduleName}.model.${pathName};
+
+import com.bjyt.bange.common.core.dto.BaseDTO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+import java.time.LocalDateTime;
+/**
+ * ${comments}保存 DTO
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@ApiModel(value = "${className}SaveDTO", description = "${comments}保存 DTO")
+@Data
+@Accessors(chain = true)
+public class ${className}SaveDTO extends BaseDTO {
+
+  #foreach ($column in $columns)
+  #if($column.columnName != $pk.columnName && $column.columnName != "create_time" && $column.columnName != "update_time")
+  @ApiModelProperty(value = "$column.comments", example = "")
+  private $column.attrType $column.lowerAttrName;
+
+  #end
+  #end
+}

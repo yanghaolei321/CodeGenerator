@@ -1,0 +1,74 @@
+/*
+ * [责任人][状态]
+ * 状态 包括：
+ * 文档已确认
+ * 接口已提测
+ * 接口已上线
+ */
+package ${package}.${moduleName}.controller;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import org.springframework.web.bind.annotation.*;
+import com.bjyt.bange.common.core.dto.IdDTO;
+import com.bjyt.bange.common.core.util.R;
+import ${package}.api.${moduleName}.model.${pathName}.*;
+import ${package}.${moduleName}.service.I${className}Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+
+import javax.validation.Valid;
+import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+/**
+ * ${comments} Controller
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Api(value = "/${classname}", tags = "${comments} Controller")
+@Slf4j
+@RestController
+@AllArgsConstructor
+@RequestMapping("/${classname}")
+public class ${className}Controller {
+
+    private final I${className}Service ${classname}Service;
+
+    @ApiOperation(value = "分页查询${comments}[][]", notes = "", position = 1)
+    @PostMapping("/page")
+    public R<IPage<${className}VO>> page(@Valid @RequestBody ${className}PageDTO param) {
+        return new R<>(${classname}Service.page(param));
+    }
+
+    @ApiOperation(value = "列表查询${comments}[][]", notes = "", position = 2)
+    @PostMapping("/list")
+    public R<List<${className}VO>> list(@Valid @RequestBody ${className}ListDTO param) {
+        return new R<>(${classname}Service.list(param));
+    }
+
+    @ApiOperation(value = "通过id查询${comments}[][]", notes = "", position = 3)
+    @PostMapping("/get")
+    public R get(@Valid @RequestBody IdDTO param) {
+        return new R<>(${classname}Service.get(param));
+    }
+
+    @ApiOperation(value = "新增${comments}[][]", notes = "", position = 4)
+    @PostMapping("/save")
+    public R save(@Valid @RequestBody ${className}SaveDTO param) {
+        return new R<>(${classname}Service.save(param));
+    }
+
+    @ApiOperation(value = "修改${comments}[][]", notes = "", position = 5)
+    @PostMapping("/update")
+    public R update(@RequestBody ${className}UpdateDTO param) {
+        return new R<>(${classname}Service.update(param));
+    }
+
+    @ApiOperation(value = "通过id删除${comments}[][]", notes = "", position = 6)
+    @PostMapping("/delete")
+    public R delete(@Valid @RequestBody IdDTO param) {
+        return new R<>(${classname}Service.delete(param));
+    }
+
+}

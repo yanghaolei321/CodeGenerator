@@ -1,0 +1,71 @@
+package ${package}.${moduleName}.service.impl;
+
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bjyt.bange.common.core.dto.IdDTO;
+import com.bjyt.bange.common.core.enums.DelFlagEnum;
+
+import ${package}.api.${moduleName}.entity.${className};
+import ${package}.api.${moduleName}.model.${pathName}.*;
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import ${package}.${moduleName}.service.I${className}Service;
+import ${package}.${moduleName}.wrapper.${className}Wrapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+/**
+ * ${comments} ServiceImpl
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@Slf4j
+@Service
+public class ${className}ServiceImpl extends ServiceImpl<${className}Mapper, ${className}> implements I${className}Service {
+
+    @Override
+    public IPage<${className}VO> page(${className}PageDTO ${classname}PageDTO) {
+        ${className}Wrapper ${classname}Wrapper = new ${className}Wrapper(this.baseMapper);
+        IPage<${className}> pages = super.page(${classname}Wrapper.entityPageCondition(${classname}PageDTO),
+                ${classname}Wrapper.entityWrapperCondition(${classname}PageDTO));
+        return ${classname}Wrapper.pageVO(pages);
+    }
+
+    @Override
+    public List<${className}VO> list(${className}ListDTO ${classname}ListDTO){
+        ${className}Wrapper ${classname}Wrapper = new ${className}Wrapper(this.baseMapper);
+        List<${className}> list = super.list(${classname}Wrapper.entityListWrapper(${classname}ListDTO));
+        return ${classname}Wrapper.listVO(list);
+    }
+
+    @Override
+    public ${className}VO get(IdDTO idDTO) {
+        ${className}Wrapper ${classname}Wrapper = new ${className}Wrapper(this.baseMapper);
+        ${className} ${classname} = super.getById(idDTO.getId());
+        return ${classname}Wrapper.entityVO(${classname});
+    }
+
+    @Override
+    public Long save(${className}SaveDTO ${classname}SaveDTO) {
+        ${className}Wrapper ${classname}Wrapper = new ${className}Wrapper(this.baseMapper);
+        ${className} ${classname} = ${classname}Wrapper.entityForSave(${classname}SaveDTO);
+        super.save(${classname});
+        return ${classname}.getId();
+    }
+
+    @Override
+    public Boolean update(${className}UpdateDTO ${classname}UpdateDTO) {
+        ${className}Wrapper ${classname}Wrapper = new ${className}Wrapper(this.baseMapper);
+        ${className} ${classname} = ${classname}Wrapper.entityForUpdate(${classname}UpdateDTO);
+        return super.updateById(${classname});
+    }
+
+    @Override
+    public Boolean delete(IdDTO idDTO) {
+        ${className} ${classname} = super.getById(idDTO.getId());
+        ${classname}.setDelFlag(DelFlagEnum.YES.getValue());
+        return super.updateById(${classname});
+    }
+}

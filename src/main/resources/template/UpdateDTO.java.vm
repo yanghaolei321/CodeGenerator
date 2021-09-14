@@ -1,0 +1,26 @@
+package ${package}.api.${moduleName}.model.${pathName};
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+/**
+ * ${comments}更新 DTO
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@ApiModel(value = "${className}UpdateDTO", description = "${comments}更新 DTO")
+@Data
+@Accessors(chain = true)
+public class ${className}UpdateDTO extends ${className}SaveDTO {
+
+  #foreach ($column in $columns)
+  #if($column.columnName == $pk.columnName)
+  @ApiModelProperty(value = "$column.comments", example = "")
+  private $column.attrType $column.lowerAttrName;
+
+  #end
+  #end
+}

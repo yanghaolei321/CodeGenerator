@@ -1,0 +1,30 @@
+package ${package}.api.${moduleName}.model.${pathName};
+
+import com.bjyt.bange.common.core.dto.BaseDTO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.experimental.Accessors;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+import java.time.LocalDateTime;
+
+/**
+ * ${comments} VO
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+@ApiModel(value = "${className}VO", description = "${comments} VO")
+@Data
+@Accessors(chain = true)
+public class ${className}VO extends BaseDTO {
+
+  #foreach ($column in $columns)
+  @ApiModelProperty(value = "$column.comments", example = "")
+  private $column.attrType $column.lowerAttrName;
+
+  #end
+}
